@@ -27,16 +27,16 @@ bool waveformAna(int argc, char **argv)
 	// [6]: The number of waveforms.
 	// [7]: Threshold (default 1mV).
 	
-	const double Scale, Nsize, RangeA, RangeB, Threshold = 1, Hsize = 401, WavNum;
+	double Scale, Nsize, RangeA, RangeB, Threshold = 1, Hsize = 401, WavNum;
 
 	TString name(argv[1]);
-	sscanf(argv[2], "%d", RangeA);
-	sscanf(argv[3]. "%d", RangeB);
-	sscanf(argv[4], "%d", Scale);
-	sscanf(argv[5], "%d", Nsize);
-	sscanf(argv[6]i, "%d", WavNum);
+	sscanf(argv[2], "%lf", &RangeA);
+	sscanf(argv[3], "%lf", &RangeB);
+	sscanf(argv[4], "%lf", &Scale);
+	sscanf(argv[5], "%lf", &Nsize);
+	sscanf(argv[6], "%lf", &WavNum);
 	if (argc == 7)
-		sscanf(argiv[7], "%d", Threshold);
+		sscanf(argv[7], "%lf", &Threshold);
 	if (RangeA < 0) {
 		cout << "Error: lower bound is smaller than 0." << endl;
 		return false;
@@ -289,4 +289,5 @@ bool waveformAna(int argc, char **argv)
 	in.close();
 	out.close();
 	*/
+	return true;
 }
