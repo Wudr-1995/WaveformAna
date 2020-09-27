@@ -8,13 +8,13 @@
 #include <string>
 #include <TSystem.h>
 #include "TMath.h"
-// #include "TSring.h"
+#include "TString.h"
 #include "TFile.h"
 #include "TF1.h"
 #include "TH1F.h"
 #include "TH2D.h"
 #include "TCanvas.h"
-
-bool waveformAna(int argc, char ** argv);
+// #include "template.h"
+bool waveformAna(int argc, char **argv);
 
 #endif

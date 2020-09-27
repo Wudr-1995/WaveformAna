@@ -1,6 +1,14 @@
 #include "waveformAna.h"
 
 using namespace std;
+
+int main(int argc, char **argv) {
+	if (waveformAna(argc, argv))
+		return true;
+	else
+		return false;
+}
+
 bool waveformAna(int argc, char **argv)
 {
 	if (argc != 7 || argc != 8) {
