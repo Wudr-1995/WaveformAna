@@ -26,7 +26,7 @@ Input arguments:
 9. Threshold (default 1mV).
 
 An example:
-|[0]|[1]|[2]|[3]|[4]|[5]|[6]|[7]|[8]|
---:|
-|./WaveAna 2|./waveforms.txt|500|700|0.2|1400|20000|0.5|
+[0] | [1] | [2] | [3] | [4] | [5] | [6] | [7] | [8]
+|:---:|
+./WaveAna 2 | ./waveforms.txt | 500 | 700 | 0.2 | 1400 | 20000 | 0.5
 
