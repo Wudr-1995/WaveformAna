@@ -11,7 +11,19 @@ int main(int argc, char **argv) {
 
 bool waveformAna(int argc, char **argv)
 {
-	if (argc != 8 || argc != 9) {
+	if (argc == 2) {
+		cout << "Input arguments:" << endl;
+		cout << "[0]: 'WaveAna'" << endl;
+		cout << "[1]: Input data type." << endl;
+		cout << "[2]: The path of input file." << endl;
+		cout << "[3]: Lower bound." << endl;
+		cout << "[4]: Higher bound." << endl;
+		cout << "[5]: Scale." << endl;
+		cout << "[6]: The number of sample points." << endl;
+		cout << "[7]: The number of waveforms." << endl;
+		cout << "[8]: Threshold (default 1mV)." << endl;
+	}
+	if (argc != 8 && argc != 9) {
 		cout << "Caution!" << endl;
 		cout << "Input arguments:" << endl;
 		cout << "[0]: 'WaveAna'" << endl;
@@ -23,7 +35,7 @@ bool waveformAna(int argc, char **argv)
 		cout << "[6]: The number of sample points." << endl;
 		cout << "[7]: The number of waveforms." << endl;
 		cout << "[8]: Threshold (default 1mV)." << endl;
-		cout << "Wrong number of input arguments!" << endl;
+		cout << "Wrong number ("<< argc <<") of input arguments!" << endl;
 		return false;
 	}
 	// Input arguments:
@@ -49,20 +61,20 @@ bool waveformAna(int argc, char **argv)
 	if (argc == 8)
 		sscanf(argv[8], "%lf", &Threshold);
 	if (RangeA < 0) {
-		cout << "Error: lower bound is smaller than 0." << endl;
+		cout << "Error: lower bound (" << RangeA <<") is smaller than 0." << endl;
 		return false;
 	}
 	if (RangeB > Nsize) {
-		cout << "Error: higher bound is bigger than the number of sample points." << endl;
+		cout << "Error: higher bound (" << RangeB << ") is bigger than the number of sample points (" << Nsize << ")." << endl;
 		return false;
 	}
-	if (RangeA < RangeB) {
-		cout << "Error: lower bound is bigge than higher bound." << endl;
+	if (RangeA > RangeB) {
+		cout << "Error: lower bound (" << RangeA << ") is bigge than higher bound (" << RangeB << ")." << endl;
 		return false;
 	}
 	TString ro(".root");
 	TString tx(".txt");
-	TFile * file = new TFile(name + "_cut" + ro, "recreate");
+	TFile * file = new TFile(name + ro, "recreate");
 	ifstream in;
 	ofstream out;
 	in.open(name + tx);
@@ -87,8 +99,8 @@ bool waveformAna(int argc, char **argv)
 	for (Int_t i = 0; i < Hsize; i ++)
 		h2->SetBinContent(i + 1, 0);
 	if (!in.good()) {
-		cout << "Wrong" << endl;
-		return 0;
+		cout << "Open input file Wrong" << endl;
+		return false;
 	}
 	for (Int_t i = 0; i < WavNum; i ++)
 	{
@@ -242,6 +254,20 @@ bool waveformAna(int argc, char **argv)
 	h4->GetXaxis()->SetTitle("/mV");
 	h4_inte->GetXaxis()->SetTitle("/mV");
 	
+	
+	file->cd();
+	h2->Write();
+	h1->Write();
+	h4->Write();
+	h4_inte->Write();
+	h5->Write();
+	h6->Write();
+	h7->Write();
+	h8->Write();
+	QvA->Write();
+	in.close();
+	out.close();
+	file->Close();
 	// auto c = new TCanvas();
 	// c->Divide(1, 2, 0, 0);
 	// c->cd(1);
@@ -262,47 +288,9 @@ bool waveformAna(int argc, char **argv)
 	// h5_inte->Draw();
 
 	// auto c2 = new TCanvas();
+	// c2->Divide(1, 1);
+	// c2->GetPad(1)->SetGridx();
 	// QvA->Draw("colz");
-
-
-	
-	file->cd();
-	h2->Write();
-	h1->Write();
-	h4->Write();
-	h4_inte->Write();
-	h5->Write();
-	h6->Write();
-	h7->Write();
-	h8->Write();
-	QvA->Write();
-	file->Close();
-	in.close();
-	out.close();
-	
-	auto c = new TCanvas();
-	c->Divide(1, 2, 0, 0);
-	c->cd(1);
-	c->GetPad(1)->SetGridx();
-	c->GetPad(1)->SetRightMargin(.01);
-	h4->Draw();
-	c->cd(2);
-	c->GetPad(2)->SetGridx();
-	h4_inte->Draw();
-
-	auto c1 = new TCanvas();
-	c1->Divide(1, 2, 0, 0);
-	c1->cd(1);
-	c1->GetPad(1)->SetGridx();
-	h5->Draw();
-	c1->cd(2);
-	c1->GetPad(2)->SetGridx();
-	h5_inte->Draw();
-
-	auto c2 = new TCanvas();
-	c2->Divide(1, 1);
-	c2->GetPad(1)->SetGridx();
-	QvA->Draw("colz");
 
 
 	return true;
