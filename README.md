@@ -26,7 +26,7 @@ Input arguments:
 9. Threshold (default 1mV).
 
 ### An example:
-''' bash
+```bash
 ./WaveAna 2 ./waveforms.txt 500 700 0.2 1400 20000 0.5
-'''
+```
 
