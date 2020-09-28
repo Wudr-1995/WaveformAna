@@ -8,17 +8,29 @@ g++ waveformAna.cc -Wall `root-config --cflags` `root-config --libs` -lRooFit -l
 Because of the data requirment system we use, there are always two column in the input txt, the first column is the data we need, the other is useless. Just like this.
 
 -0.001875	-0.001875
+
 -0.002031	-0.002031
+
 -0.002188	-0.002188
+
 -0.002031	-0.002031
+
 -0.001875	-0.001875
+
 -0.001875	-0.001875
+
 -0.001719	-0.001719
+
 -0.002031	-0.002031
+
 -0.002500	-0.002500
+
 -0.002188	-0.002188
+
 -0.001719	-0.001719
+
 -0.001719	-0.001719
+
 -0.002500	-0.002500
 
 The program also can accept the input file who has only one column. It's necessary to set the first argument input in the command line (1: one line type, 2: two line type). If type 1 is chosen, the program also can due with input file who has one waveform per line.
