@@ -11,19 +11,6 @@ int main(int argc, char **argv) {
 
 bool waveformAna(int argc, char **argv)
 {
-	if (argc == 2) {
-		cout << "Input arguments:" << endl;
-		cout << "[0]: 'WaveAna'" << endl;
-		cout << "[1]: Input data type." << endl;
-		cout << "[2]: The path of input file." << endl;
-		cout << "[3]: Lower bound." << endl;
-		cout << "[4]: Higher bound." << endl;
-		cout << "[5]: Scale." << endl;
-		cout << "[6]: The number of sample points." << endl;
-		cout << "[7]: The number of waveforms." << endl;
-		cout << "[8]: Threshold (default 1mV)." << endl;
-		return false;
-	}
 	if (argc != 8 && argc != 9) {
 		cout << "Caution!" << endl;
 		cout << "Input arguments:" << endl;
@@ -59,7 +46,7 @@ bool waveformAna(int argc, char **argv)
 	sscanf(argv[5], "%lf", &Scale);
 	sscanf(argv[6], "%lf", &Nsize);
 	sscanf(argv[7], "%lf", &WavNum);
-	if (argc == 8)
+	if (argc == 9)
 		sscanf(argv[8], "%lf", &Threshold);
 	if (RangeA < 0) {
 		cout << "Error: lower bound (" << RangeA <<") is smaller than 0." << endl;
