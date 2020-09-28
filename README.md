@@ -51,6 +51,6 @@ Input arguments:
 
 ### An example:
 ```bash
-./WaveAna 2 ./waveforms.txt 500 700 0.2 1400 20000 0.5
+./WaveAna 2 ./waveforms 500 700 0.2 1400 20000 0.5
 ```
 
