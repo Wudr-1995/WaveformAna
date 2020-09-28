@@ -45,7 +45,7 @@ Input arguments:
 4. Lower bound.
 5. Higher bound.
 6. Scale.
-7. The number of sample points.
+7. The number of sampling points.
 8. The number of waveforms.
 9. Threshold (default 1mV).
 

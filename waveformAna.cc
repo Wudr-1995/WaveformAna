@@ -20,7 +20,7 @@ bool waveformAna(int argc, char **argv)
 		cout << "[3]: Lower bound." << endl;
 		cout << "[4]: Higher bound." << endl;
 		cout << "[5]: Scale." << endl;
-		cout << "[6]: The number of sample points." << endl;
+		cout << "[6]: The number of sampling points." << endl;
 		cout << "[7]: The number of waveforms." << endl;
 		cout << "[8]: Threshold (default 1mV)." << endl;
 		cout << "Wrong number ("<< argc <<") of input arguments!" << endl;
