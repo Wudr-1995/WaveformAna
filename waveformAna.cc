@@ -4,9 +4,9 @@ using namespace std;
 
 int main(int argc, char **argv) {
 	if (waveformAna(argc, argv))
-		return true;
+		return 1;
 	else
-		return false;
+		return 0;
 }
 
 bool waveformAna(int argc, char **argv)
@@ -22,6 +22,7 @@ bool waveformAna(int argc, char **argv)
 		cout << "[6]: The number of sample points." << endl;
 		cout << "[7]: The number of waveforms." << endl;
 		cout << "[8]: Threshold (default 1mV)." << endl;
+		return false;
 	}
 	if (argc != 8 && argc != 9) {
 		cout << "Caution!" << endl;
