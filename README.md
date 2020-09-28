@@ -1,9 +1,30 @@
 # WaveformAna
-A waveform analysis program for PMT &amp; SiPM
+A waveform analysis program for PMT & SiPM
 ## Compile Need
 CERN ROOT
 ## Compile Command
 g++ waveformAna.cc -Wall `root-config --cflags` `root-config --libs` -lRooFit -lFumili -lpthread -o WaveAna
 ## Type of input data
-Because of the data requirment system used, there are always two column in the input txt, the first column is the data we need, the other is useless. Just like this.
+Because of the data requirment system we use, there are always two column in the input txt, the first column is the data we need, the other is useless. Just like this.
+
 Data	Others
+
+The program also can accept the input file who has only one column. It's necessary to set the first argument input in the command line (1: one line type, 2: two line type). If type 1 is chosen, the program also can due with input file who has one waveform per line.
+
+For convenience, all waveform data were put into one txt file. (This step can be achieved by "type \*.txt >> ../input.txt" command in windows cmd")
+## Command
+Input arguments:
+[0]: "./WaveAna"
+[1]: Input data type.
+[2]: The path of input file.
+[3]: Lower bound.
+[4]: Higher bound.
+[5]: Scale.
+[6]: The number of sample points.
+[7]: The number of waveforms.
+[8]: Threshold (default 1mV).
+
+An example:
+	[0]	[1]	[2]	[3]	[4]	[5]	[6]	[7]	[8]
+	./WaveAna 2	./waveforms.txt	500	700	0.2	1400	20000	0.5
+
