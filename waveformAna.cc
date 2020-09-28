@@ -64,9 +64,7 @@ bool waveformAna(int argc, char **argv)
 	ofstream out;
 	in.open(name + tx);
 	out.open(name + "_wf" + tx);
-	const double Charge_Thr = 0.2;
 	double Ori_signal, baseline, point, amp, peak;
-	char useless[50];
 	double nan;
 	double rise_low = 0, rise_high = 0, fall_low = 0, fall_high = 0, rise_half = 0, fall_half = 0, val;
 	double FWHM, risetime, falltime, Q, Ped, SPE, t, S, P;
@@ -91,18 +89,9 @@ bool waveformAna(int argc, char **argv)
 	}
 	for (Int_t i = 0; i < WavNum; i ++)
 	{
-		//cout << i << endl;
-		/*if (i > 0)
-			in.ignore(2, '\n');
-		in.ignore(100, '\n');
-		in.ignore(100, '\n');
-		in.ignore(100, '\n');
-		*/
 		for (Int_t j = 0; j < Nsize; j ++)
 		{
-			//cout << j << endl;
 			in >> Ori_signal >> nan;
-			//cout << Ori_signal << endl;
 			h1->SetBinContent(j + 1, 1000 * Ori_signal);
 		}
 		baseline = 0;
@@ -124,12 +113,7 @@ bool waveformAna(int argc, char **argv)
 			charge = charge + baseline - h1->GetBinContent(j);
 		h5->Fill(charge * Scale / 50);
 		QvA->Fill(charge * Scale / 50, amp);
-		/*if (amp > Threshold)
-			cout << "1" <<endl;
-		else
-			cout << "0" << endl;*/
 		if (amp > Threshold)
-		//if (charge * Scale / 50 > Charge_Thr)
 		{
 			count ++;
 			n = peak - 200;
@@ -149,7 +133,6 @@ bool waveformAna(int argc, char **argv)
 			if (val < 0.5 * amp)
 				rise_half = j;
 		}
-		//cout << "rise: " << rise_low << " rise_half: " << rise_half << endl;
 		for (Int_t j = 0; j < Nsize; j ++)
 		{
 			h3->SetBinContent(j + 1, h1->GetBinContent(Nsize - j));
@@ -165,11 +148,9 @@ bool waveformAna(int argc, char **argv)
 			if (val < 0.5 * amp)
 				fall_half = Nsize - j + 1;
 		}
-		//cout << "fall: " << fall_high << " fall_half: " << fall_half << endl;
 		risetime = (rise_high - rise_low) * Scale;
 		falltime = (fall_low - fall_high) * Scale;
 		FWHM = (fall_half - rise_half) * Scale;
-		//cout << "FWHM: " << FWHM << endl;
 		if (amp > 3)
 		{
 			h6->Fill(risetime);
@@ -246,10 +227,6 @@ bool waveformAna(int argc, char **argv)
 	cout << "Falltime" << falltime << endl;
 	cout << "FWHM" << FWHM << endl;
 	cout << "Q" << Q <<endl;
-	// cout << rise_low << endl;
-	// cout << rise_high << endl;
-	// cout << fall_low << endl;
-	// cout << fall_high << endl;
 	cout << "Gain: " << gain << endl;
 
 	h1->GetXaxis()->SetTitle("/ns");
@@ -258,6 +235,44 @@ bool waveformAna(int argc, char **argv)
 	h2->GetYaxis()->SetTitle("/mV");
 	h4->GetXaxis()->SetTitle("/mV");
 	h4_inte->GetXaxis()->SetTitle("/mV");
+	
+	// auto c = new TCanvas();
+	// c->Divide(1, 2, 0, 0);
+	// c->cd(1);
+	// c->GetPad(1)->SetGridx();
+	// c->GetPad(1)->SetRightMargin(.01);
+	// h4->Draw();
+	// c->cd(2);
+	// c->GetPad(2)->SetGridx();
+	// h4_inte->Draw();
+
+	// auto c1 = new TCanvas();
+	// c1->Divide(1, 2, 0, 0);
+	// c1->cd(1);
+	// c1->GetPad(1)->SetGridx();
+	// h5->Draw();
+	// c1->cd(2);
+	// c1->GetPad(2)->SetGridx();
+	// h5_inte->Draw();
+
+	// auto c2 = new TCanvas();
+	// QvA->Draw("colz");
+
+
+	
+	file->cd();
+	h2->Write();
+	h1->Write();
+	h4->Write();
+	h4_inte->Write();
+	h5->Write();
+	h6->Write();
+	h7->Write();
+	h8->Write();
+	QvA->Write();
+	file->Close();
+	in.close();
+	out.close();
 	
 	auto c = new TCanvas();
 	c->Divide(1, 2, 0, 0);
@@ -279,23 +294,10 @@ bool waveformAna(int argc, char **argv)
 	h5_inte->Draw();
 
 	auto c2 = new TCanvas();
+	c2->Divide(1, 1);
+	c2->GetPad(1)->SetGridx();
 	QvA->Draw("colz");
 
 
-	/*
-	file->cd();
-	h2->Write();
-	h1->Write();
-	h4->Write();
-	h4_inte->Write();
-	h5->Write();
-	h6->Write();
-	h7->Write();
-	h8->Write();
-	QvA->Write();
-	//file->close();
-	in.close();
-	out.close();
-	*/
 	return true;
 }
