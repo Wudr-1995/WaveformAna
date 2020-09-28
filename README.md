@@ -14,17 +14,18 @@ The program also can accept the input file who has only one column. It's necessa
 For convenience, all waveform data were put into one txt file. (This step can be achieved by "type \*.txt >> ../input.txt" command in windows cmd")
 ## Command
 Input arguments:
-[0]: "./WaveAna"
-[1]: Input data type.
-[2]: The path of input file.
-[3]: Lower bound.
-[4]: Higher bound.
-[5]: Scale.
-[6]: The number of sample points.
-[7]: The number of waveforms.
-[8]: Threshold (default 1mV).
+
+1. "./WaveAna"
+2. Input data type.
+3. The path of input file.
+4. Lower bound.
+5. Higher bound.
+6. Scale.
+7. The number of sample points.
+8. The number of waveforms.
+9. Threshold (default 1mV).
 
 An example:
-	[0]	[1]	[2]	[3]	[4]	[5]	[6]	[7]	[8]
-	./WaveAna 2	./waveforms.txt	500	700	0.2	1400	20000	0.5
+[0]|[1]|[2]|[3]|[4]|[5]|[6]|[7]|[8]
+./WaveAna 2|./waveforms.txt|500|700|0.2|1400|20000|0.5
 
